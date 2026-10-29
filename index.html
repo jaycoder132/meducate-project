@@ -1,0 +1,261 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meducate | Learning Hub</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Our CSS file -->
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+
+  <div class="app">
+
+    <!-- LEFT SIDEBAR -->
+    <aside class="sidebar">
+      <div class="logo">
+        <span class="logo-icon">♥</span>
+        <span>Meducate</span>
+      </div>
+
+      <p class="menu-label">MAIN MENU</p>
+
+      <nav class="navigation">
+        <a href="#" class="nav-link active" data-section="dashboard">
+          <span>⌂</span> Dashboard
+        </a>
+
+        <a href="#" class="nav-link" data-section="topics">
+          <span>▤</span> Health Topics
+        </a>
+
+        <a href="#" class="nav-link" data-section="challenges">
+          <span>★</span> Challenges
+        </a>
+
+        <a href="#" class="nav-link" data-section="progress">
+          <span>◷</span> My Progress
+        </a>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <p>Learn better. Live healthier.</p>
+        <small>Meducate © 2026</small>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">YOUR HEALTH LEARNING SPACE</p>
+          <h1>Learning Dashboard</h1>
+          <p class="subtitle">
+            Explore health topics and improve your knowledge.
+          </p>
+        </div>
+
+        <div class="user-profile">
+          <div class="avatar">HW</div>
+          <div>
+            <strong>Health Explorer</strong>
+            <small>Guest Learner</small>
+          </div>
+        </div>
+      </header>
+
+      <!-- WELCOME BANNER -->
+      <section class="welcome-banner">
+        <div>
+          <span class="banner-label">WELCOME TO MEDUCATE</span>
+          <h2>Your journey to better health starts here.</h2>
+          <p>
+            Discover reliable health information through,
+            interactive lessons, educational challenges,
+            and easy to understand evidence-based lessons.
+          </p>
+          <a href="#courses" class="banner-button">
+            Explore Health Topics →
+          </a>
+        </div>
+        <div class="banner-art" aria-hidden="true">♥</div>
+      </section>
+
+      <!-- SUMMARY CARDS -->
+      <section class="stats-grid">
+        <div class="stat-card">
+          <span class="stat-icon">▤</span>
+          <div>
+            <h3 id="totalTopics">4</h3>
+            <p>Health Topics</p>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <span class="stat-icon">✓</span>
+          <div>
+            <h3 id="completedTopics">0</h3>
+            <p>Completed Topics</p>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <span class="stat-icon">◷</span>
+          <div>
+            <h3 id="progressPercent">0%</h3>
+            <p>Learning Progress</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- HEALTH TOPICS -->
+      <section id="courses" class="courses-section">
+
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">EXPLORE & LEARN</p>
+            <h2>Health Learning Topics</h2>
+          </div>
+          <span class="topic-count" id="topicCount">4 topics</span>
+        </div>
+
+        <div class="toolbar">
+          <input
+            type="search"
+            id="searchInput"
+            placeholder="Search health topics..."
+            aria-label="Search health topics"
+          >
+
+          <select id="categoryFilter" aria-label="Filter topics">
+            <option value="all">All Categories</option>
+            <option value="disease">Disease Awareness</option>
+            <option value="safety">Health Safety</option>
+            <option value="literacy">Digital Literacy</option>
+          </select>
+        </div>
+
+        <div class="course-grid" id="courseGrid">
+
+          <article class="course-card" data-category="disease"
+                   data-title="hypertension high blood pressure">
+            <div class="course-cover hypertension">
+              <span class="cover-icon">♥</span>
+              <span class="course-tag">Disease Awareness</span>
+            </div>
+            <div class="course-body">
+              <h3>Hypertension</h3>
+              <p>Understand blood pressure, prevention, and healthy habits.</p>
+              <div class="progress-track">
+                <div class="progress-fill" id="bar-hypertension"></div>
+              </div>
+              <small id="status-hypertension">Not Started</small>
+              <button class="course-button" data-topic="hypertension">
+                Start Learning →
+              </button>
+            </div>
+          </article>
+
+          <article class="course-card" data-category="disease"
+                   data-title="diabetes mellitus blood sugar">
+            <div class="course-cover diabetes">
+              <span class="cover-icon">✚</span>
+              <span class="course-tag">Disease Awareness</span>
+            </div>
+            <div class="course-body">
+              <h3>Diabetes Mellitus</h3>
+              <p>Learn about blood sugar, nutrition, and self-care.</p>
+              <div class="progress-track">
+                <div class="progress-fill" id="bar-diabetes"></div>
+              </div>
+              <small id="status-diabetes">Not Started</small>
+              <button class="course-button" data-topic="diabetes">
+                Start Learning →
+              </button>
+            </div>
+          </article>
+
+          <article class="course-card" data-category="safety"
+                   data-title="medication safety proper medicine use">
+            <div class="course-cover medication">
+              <span class="cover-icon">✚</span>
+              <span class="course-tag">Health Safety</span>
+            </div>
+            <div class="course-body">
+              <h3>Medication Safety</h3>
+              <p>Understand medicine labels and safe medication practices.</p>
+              <div class="progress-track">
+                <div class="progress-fill" id="bar-medication"></div>
+              </div>
+              <small id="status-medication">Not Started</small>
+              <button class="course-button" data-topic="medication">
+                Start Learning →
+              </button>
+            </div>
+          </article>
+
+          <article class="course-card" data-category="literacy"
+                   data-title="digital health literacy online information">
+            <div class="course-cover literacy">
+              <span class="cover-icon">◎</span>
+              <span class="course-tag">Digital Literacy</span>
+            </div>
+            <div class="course-body">
+              <h3>Digital Health Literacy</h3>
+              <p>Identify reliable health information and online misinformation.</p>
+              <div class="progress-track">
+                <div class="progress-fill" id="bar-literacy"></div>
+              </div>
+              <small id="status-literacy">Not Started</small>
+              <button class="course-button" data-topic="literacy">
+                Start Learning →
+              </button>
+            </div>
+          </article>
+
+        </div>
+        <p id="emptyMessage" class="empty-message" hidden>
+          No matching health topics found.
+        </p>
+      </section>
+
+      <!-- LEARNING PANEL -->
+      <section id="lessonPanel" class="lesson-panel" hidden>
+        <button id="backButton" class="back-button">
+          ← Back to Topics
+        </button>
+
+        <p class="eyebrow">MEDUCATE LEARNING MODULE</p>
+        <h2 id="lessonTitle"></h2>
+        <p id="lessonDescription"></p>
+
+        <div class="lesson-box">
+          <h3>What You'll Learn</h3>
+          <ul id="lessonPoints"></ul>
+        </div>
+
+        <button id="completeButton" class="complete-button">
+          Mark Topic as Completed ✓
+        </button>
+      </section>
+
+      <footer class="footer">
+        Meducate | Nursing Informatics Educational Project
+      </footer>
+
+    </main>
+  </div>
+
+  <!-- Our JavaScript file -->
+  <script src="script.js"></script>
+</body>
+</html>
