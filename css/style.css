@@ -756,3 +756,125 @@ h1 {
     flex-direction: column;
   }
 }
+
+
+/* ====================================
+   MEDUCATE - PART 02 DESIGN FIX
+==================================== */
+
+/* Two-column module layout */
+.module-layout {
+  display: grid;
+  grid-template-columns: 250px minmax(0, 1fr);
+  gap: 25px;
+  align-items: start;
+  margin-top: 25px;
+}
+
+/* Left lesson sidebar */
+.lesson-sidebar {
+  display: block;
+  background: #eaf7f6;
+  padding: 22px;
+  border-radius: 16px;
+}
+
+.lesson-sidebar h3 {
+  font-size: 15px;
+  margin-bottom: 18px;
+  color: #183b46;
+}
+
+/* Lesson navigation buttons */
+.lesson-nav-button {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 10px;
+  background: white;
+  border: 1px solid #d3eae7;
+  border-radius: 10px;
+  text-align: left;
+  font-size: 12px;
+  color: #183b46;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.lesson-nav-button:hover {
+  background: #d3eae7;
+}
+
+.lesson-nav-button.selected {
+  background: #087f83;
+  color: white;
+  border-color: #087f83;
+}
+
+/* Right lesson content */
+.lesson-content {
+  display: block;
+  min-width: 0;
+  background: #f8fcfc;
+  border: 1px solid #d3eae7;
+  padding: 30px;
+  border-radius: 16px;
+}
+
+.lesson-content h2 {
+  color: #183b46;
+  font-size: 23px;
+}
+
+/* Knowledge check container */
+.knowledge-check {
+  display: block;
+  background: white;
+  border: 1px solid #d3eae7;
+  padding: 25px;
+  border-radius: 14px;
+  margin-top: 25px;
+}
+
+/* Answer options */
+.answer-option {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 15px;
+  margin-bottom: 12px;
+  background: #eaf7f6;
+  border: 1px solid #d3eae7;
+  border-radius: 10px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.answer-option:hover {
+  background: #d3eae7;
+}
+
+.answer-option.chosen {
+  border: 2px solid #087f83;
+  background: #d3eae7;
+}
+
+/* Bottom navigation */
+.lesson-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+/* Smaller laptop screens */
+@media (max-width: 1050px) {
+  .module-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.complete-button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
