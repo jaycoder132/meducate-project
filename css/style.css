@@ -1248,3 +1248,327 @@ h1 {
     animation: none;
   }
 }
+
+
+/* ======================================
+   MEDUCATE PART 04 - HEALTH SIMULATOR
+====================================== */
+
+.simulator-section {
+  background: white;
+  border-radius: 22px;
+  padding: 32px;
+  margin-top: 25px;
+  box-shadow: var(--shadow);
+}
+
+.sim-heading {
+  margin-bottom: 30px;
+}
+
+.sim-heading h2 {
+  font-size: 27px;
+  margin-bottom: 10px;
+}
+
+.sim-heading p {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+/* INTRODUCTION BANNER */
+.sim-banner {
+  background: linear-gradient(110deg, #087f83, #20aaa5);
+  color: white;
+  padding: 35px;
+  border-radius: 20px;
+  margin-bottom: 30px;
+}
+
+.sim-banner span {
+  font-size: 11px;
+  letter-spacing: 2px;
+}
+
+.sim-banner h3 {
+  font-size: 26px;
+  margin: 12px 0;
+}
+
+.sim-banner p {
+  font-size: 13px;
+  line-height: 1.8;
+  max-width: 600px;
+}
+
+/* SCENARIO SELECTION CARDS */
+.sim-topic-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.sim-topic-card {
+  background: #f7fcfb;
+  border: 1px solid #d3eae7;
+  border-radius: 18px;
+  padding: 25px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  transition: 0.2s;
+}
+
+.sim-topic-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--teal);
+  box-shadow: var(--shadow);
+}
+
+.sim-topic-icon {
+  background: #d3eae7;
+  color: var(--teal);
+  width: 55px;
+  height: 55px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  font-size: 27px;
+}
+
+.sim-topic-card strong {
+  color: var(--text);
+  font-size: 16px;
+}
+
+.sim-topic-card small {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.sim-topic-card > span:last-child {
+  color: var(--teal);
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+/* SCORE AND PROGRESS */
+.sim-status,
+.sim-progress-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+}
+
+.sim-status {
+  color: var(--teal);
+  font-weight: 600;
+  margin-bottom: 25px;
+}
+
+#simScore {
+  background: var(--mint);
+  border-radius: 20px;
+  padding: 10px 15px;
+  font-size: 12px;
+}
+
+.sim-progress-label {
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+
+.sim-progress-track {
+  height: 9px;
+  background: #e5f1ef;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 30px;
+}
+
+#simProgressFill {
+  background: var(--teal);
+  height: 100%;
+  width: 0;
+  transition: width 0.3s;
+}
+
+/* PATIENT SCENARIO CARD */
+.sim-case-card {
+  background: #f8fcfc;
+  border: 1px solid var(--light-teal);
+  border-radius: 22px;
+  padding: 35px;
+  max-width: 900px;
+  margin: auto;
+}
+
+.sim-case-label {
+  display: inline-block;
+  color: var(--teal);
+  background: var(--light-teal);
+  border-radius: 20px;
+  padding: 8px 14px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-bottom: 18px;
+}
+
+.sim-case-card h3 {
+  font-size: 23px;
+  margin-bottom: 18px;
+}
+
+#simSituation {
+  font-size: 14px;
+  line-height: 1.9;
+  color: var(--text);
+}
+
+/* DECISION CHOICES */
+.sim-question-box {
+  background: white;
+  border-radius: 15px;
+  padding: 25px;
+  margin-top: 25px;
+}
+
+.sim-question-box h4 {
+  font-size: 17px;
+  margin: 0 0 20px;
+}
+
+.sim-choice {
+  width: 100%;
+  display: block;
+  text-align: left;
+  background: var(--mint);
+  border: 2px solid var(--light-teal);
+  border-radius: 12px;
+  padding: 17px;
+  margin-bottom: 12px;
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--text);
+  transition: 0.2s;
+}
+
+.sim-choice:hover:not(:disabled) {
+  background: var(--light-teal);
+  border-color: var(--teal);
+}
+
+.sim-choice.selected {
+  background: var(--light-teal);
+  border-color: var(--teal);
+}
+
+.sim-choice:disabled {
+  cursor: default;
+}
+
+/* FEEDBACK */
+.sim-feedback {
+  padding: 22px;
+  border-radius: 14px;
+  margin-top: 25px;
+}
+
+.sim-feedback.safe {
+  background: #e3f5eb;
+  border-left: 4px solid #24834f;
+}
+
+.sim-feedback.unsafe {
+  background: #fff0e6;
+  border-left: 4px solid #c97932;
+}
+
+.sim-feedback h4 {
+  margin: 0 0 10px;
+  font-size: 16px;
+}
+
+.sim-feedback p {
+  font-size: 13px;
+  line-height: 1.8;
+  margin: 0;
+}
+
+.sim-next-button {
+  background: var(--teal);
+  border: none;
+  color: white;
+  border-radius: 11px;
+  padding: 14px 24px;
+  font-size: 13px;
+  font-weight: 600;
+  margin-top: 25px;
+}
+
+.sim-next-button:hover {
+  background: var(--dark-teal);
+}
+
+/* RESULTS SCREEN */
+.sim-results {
+  background: #f8fcfc;
+  border: 1px solid var(--light-teal);
+  border-radius: 22px;
+  padding: 50px 30px;
+  text-align: center;
+}
+
+.sim-result-icon {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: var(--light-teal);
+  color: var(--teal);
+  display: grid;
+  place-items: center;
+  font-size: 42px;
+  margin: 0 auto 25px;
+}
+
+#simFinalScore {
+  color: var(--teal);
+  font-size: 42px;
+  margin: 25px 0;
+}
+
+.sim-result-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 25px;
+}
+
+.sim-result-actions .sim-next-button {
+  margin-top: 0;
+}
+
+/* SMALLER SCREENS */
+@media (max-width: 800px) {
+  .sim-topic-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .simulator-section,
+  .sim-case-card {
+    padding: 20px;
+  }
+
+  .sim-status {
+    flex-wrap: wrap;
+  }
+}

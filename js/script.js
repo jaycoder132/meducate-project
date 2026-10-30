@@ -600,6 +600,9 @@ document.querySelectorAll(".nav-link").forEach(link => {
 
     } else if (section === "challenges") {
       openChallengeHome();
+      
+    } else if (section === "simulator") {
+      openSimulator();
     }
 
     document.querySelectorAll(".nav-link").forEach(item => {
@@ -772,6 +775,7 @@ const nextQuestionButton =
 function openChallengeHome() {
 
   // Hide dashboard learning content
+  document.getElementById("simulatorSection").hidden = true;
   document.getElementById("courses").hidden = true;
   document.querySelector(".stats-grid").hidden = true;
   document.querySelector(".welcome-banner").hidden = true;
@@ -793,12 +797,12 @@ function openChallengeHome() {
 function restoreDashboard() {
 
   mythFactSection.hidden = true;
+  document.getElementById("simulatorSection").hidden = true;
+  lessonPanel.hidden = true;
 
   document.getElementById("courses").hidden = false;
   document.querySelector(".stats-grid").hidden = false;
   document.querySelector(".welcome-banner").hidden = false;
-
-  lessonPanel.hidden = true;
 
   window.scrollTo({
     top: 0,
@@ -1007,3 +1011,620 @@ document.getElementById("chooseAnotherButton")
 
 document.getElementById("backFromChallenge")
   .addEventListener("click", restoreDashboard);
+
+// ======================================
+// PART 04 - HEALTH DECISION SIMULATOR
+// ======================================
+
+// 1. OUR FICTIONAL PATIENT SCENARIOS
+
+const simulatorCases = {
+
+  hypertension: {
+    title: "Hypertension",
+    steps: [
+      {
+        title: "An Unexpected Blood Pressure Reading",
+        situation:
+          "Maria, age 52, checks her blood pressure at home. " +
+          "Her reading is 150/95 mmHg. She feels well and " +
+          "has no symptoms. This is her first elevated reading.",
+        choices: [
+          {
+            text: "Ignore the reading because she feels fine.",
+            safe: false,
+            feedback:
+              "High blood pressure often has no symptoms. " +
+              "An elevated reading should not be ignored."
+          },
+          {
+            text: "Rest quietly, check her measurement technique, and repeat the reading.",
+            safe: true,
+            feedback:
+              "Correct. Resting quietly and repeating the " +
+              "measurement using proper technique is a sensible " +
+              "first step. A single reading does not establish a diagnosis."
+          },
+          {
+            text: "Take an extra blood pressure tablet immediately.",
+            safe: false,
+            feedback:
+              "Taking extra medication without instructions " +
+              "can be dangerous."
+          }
+        ]
+      },
+      {
+        title: "The Reading Remains Elevated",
+        situation:
+          "Maria repeats the measurement correctly. Her " +
+          "blood pressure remains around 150/95 mmHg. " +
+          "She still has no symptoms.",
+        choices: [
+          {
+            text: "Arrange a healthcare consultation and keep a record of the readings.",
+            safe: true,
+            feedback:
+              "Correct. Repeated elevated readings warrant " +
+              "medical evaluation. Recording readings can help " +
+              "the healthcare professional assess her blood pressure."
+          },
+          {
+            text: "Stop checking because she feels normal.",
+            safe: false,
+            feedback:
+              "Hypertension may remain unnoticed without " +
+              "regular monitoring."
+          },
+          {
+            text: "Borrow a friend's blood pressure medicine.",
+            safe: false,
+            feedback:
+              "Medicines should never be borrowed or shared."
+          }
+        ]
+      },
+      {
+        title: "Developing a Healthy Routine",
+        situation:
+          "After a consultation, Maria receives an individualized " +
+          "blood pressure management plan. She wants to " +
+          "support her treatment at home.",
+        choices: [
+          {
+            text: "Stop treatment whenever her readings improve.",
+            safe: false,
+            feedback:
+              "Treatment should not be stopped without " +
+              "professional advice."
+          },
+          {
+            text: "Use an advertised miracle supplement instead.",
+            safe: false,
+            feedback:
+              "Unverified products should not replace " +
+              "recommended treatment."
+          },
+          {
+            text: "Follow her care plan, monitor blood pressure, and maintain healthy habits.",
+            safe: true,
+            feedback:
+              "Correct. Following the agreed care plan and " +
+              "healthy lifestyle practices supports blood pressure management."
+          }
+        ]
+      }
+    ]
+  },
+
+  diabetes: {
+    title: "Diabetes Mellitus",
+    steps: [
+      {
+        title: "Recognizing Possible Low Blood Sugar",
+        situation:
+          "Daniel, age 45, has diabetes and uses insulin. " +
+          "He is awake, able to swallow, and suddenly feels " +
+          "shaky, sweaty, and hungry. His glucose meter is nearby.",
+        choices: [
+          {
+            text: "Ignore the symptoms and continue working.",
+            safe: false,
+            feedback:
+              "These symptoms may indicate hypoglycemia " +
+              "and should be assessed promptly."
+          },
+          {
+            text: "Check his blood glucose immediately.",
+            safe: true,
+            feedback:
+              "Correct. When available, checking glucose " +
+              "helps confirm suspected hypoglycemia. " +
+              "Treatment should not be delayed if testing is unavailable."
+          },
+          {
+            text: "Take extra insulin.",
+            safe: false,
+            feedback:
+              "Extra insulin could make low blood sugar worse."
+          }
+        ]
+      },
+      {
+        title: "A Low Glucose Reading",
+        situation:
+          "Daniel's glucose reading is 62 mg/dL. " +
+          "He is still awake and can safely swallow.",
+        choices: [
+          {
+            text: "Consume 15 grams of fast-acting carbohydrate and recheck glucose after 15 minutes.",
+            safe: true,
+            feedback:
+              "Correct. For many conscious adults, the 15-15 " +
+              "approach is used for glucose below 70 mg/dL. " +
+              "Repeat treatment if still low and follow the " +
+              "individualized diabetes plan."
+          },
+          {
+            text: "Take another dose of insulin.",
+            safe: false,
+            feedback:
+              "Insulin lowers glucose and may worsen hypoglycemia."
+          },
+          {
+            text: "Go to sleep without treating the low glucose.",
+            safe: false,
+            feedback:
+              "Untreated hypoglycemia can become dangerous."
+          }
+        ]
+      },
+      {
+        title: "Preventing Another Episode",
+        situation:
+          "Daniel's glucose improves and he feels better. " +
+          "He wants to reduce the chance of another episode.",
+        choices: [
+          {
+            text: "Stop all diabetes medicines permanently.",
+            safe: false,
+            feedback:
+              "Medication changes require professional guidance."
+          },
+          {
+            text: "Review the episode, meals, activity, and medicines with his diabetes care team.",
+            safe: true,
+            feedback:
+              "Correct. Reviewing possible causes with the " +
+              "healthcare team can help prevent future episodes."
+          },
+          {
+            text: "Ignore future symptoms if they feel similar.",
+            safe: false,
+            feedback:
+              "Repeated symptoms should be assessed and treated promptly."
+          }
+        ]
+      }
+    ]
+  },
+
+  medication: {
+    title: "Medication Safety",
+    steps: [
+      {
+        title: "An Unclear Prescription Label",
+        situation:
+          "Anna receives a new prescription medicine. " +
+          "She cannot clearly understand the dosing instructions.",
+        choices: [
+          {
+            text: "Guess the dose based on previous medicines.",
+            safe: false,
+            feedback:
+              "Guessing medication doses can cause errors."
+          },
+          {
+            text: "Ask the pharmacist to explain the instructions.",
+            safe: true,
+            feedback:
+              "Correct. Pharmacists can clarify medication " +
+              "instructions before the medicine is taken."
+          },
+          {
+            text: "Ask a friend to choose the dose.",
+            safe: false,
+            feedback:
+              "A friend's advice is not a substitute for " +
+              "professional medication instructions."
+          }
+        ]
+      },
+      {
+        title: "A Possible Medicine Interaction",
+        situation:
+          "Anna also wants to take an herbal supplement " +
+          "that she discovered online.",
+        choices: [
+          {
+            text: "Take it because natural products are always safe.",
+            safe: false,
+            feedback:
+              "Natural products can cause adverse effects " +
+              "and medicine interactions."
+          },
+          {
+            text: "Stop her prescribed medicine and use the supplement.",
+            safe: false,
+            feedback:
+              "Unverified supplements should not replace " +
+              "prescribed treatment."
+          },
+          {
+            text: "Ask her pharmacist or prescriber about possible interactions.",
+            safe: true,
+            feedback:
+              "Correct. A healthcare professional can " +
+              "review possible interactions."
+          }
+        ]
+      },
+      {
+        title: "Remembering Medication Instructions",
+        situation:
+          "Anna wants to avoid forgetting her medicine instructions.",
+        choices: [
+          {
+            text: "Create a medication schedule based on her prescription.",
+            safe: true,
+            feedback:
+              "Correct. A medication schedule can help " +
+              "support adherence when it follows the prescription."
+          },
+          {
+            text: "Take several doses together whenever she remembers.",
+            safe: false,
+            feedback:
+              "Taking multiple doses together can be harmful. " +
+              "Missed-dose instructions depend on the medicine."
+          },
+          {
+            text: "Share her medicine with relatives who have similar symptoms.",
+            safe: false,
+            feedback:
+              "Prescription medicines should not be shared."
+          }
+        ]
+      }
+    ]
+  },
+
+  literacy: {
+    title: "Digital Health Literacy",
+    steps: [
+      {
+        title: "A Viral Medical Claim",
+        situation:
+          "Paolo sees a social media advertisement claiming " +
+          "that a herbal drink can completely cure diabetes.",
+        choices: [
+          {
+            text: "Buy the product immediately.",
+            safe: false,
+            feedback:
+              "Unverified medical claims can be misleading " +
+              "and potentially harmful."
+          },
+          {
+            text: "Verify the claim using reliable medical sources.",
+            safe: true,
+            feedback:
+              "Correct. Checking trustworthy sources " +
+              "helps identify misleading health claims."
+          },
+          {
+            text: "Share the advertisement without checking it.",
+            safe: false,
+            feedback:
+              "Sharing unverified claims can spread misinformation."
+          }
+        ]
+      },
+      {
+        title: "Evaluating the Website",
+        situation:
+          "The advertisement links to a website with " +
+          "testimonials but no clear author or scientific references.",
+        choices: [
+          {
+            text: "Trust the website because it looks professional.",
+            safe: false,
+            feedback:
+              "Professional design does not guarantee accuracy."
+          },
+          {
+            text: "Believe the testimonials as scientific proof.",
+            safe: false,
+            feedback:
+              "Testimonials alone do not establish medical effectiveness."
+          },
+          {
+            text: "Check authorship, supporting evidence, and source credibility.",
+            safe: true,
+            feedback:
+              "Correct. These checks help evaluate " +
+              "online health information."
+          }
+        ]
+      },
+      {
+        title: "Making an Informed Decision",
+        situation:
+          "Paolo discovers that the product's claims " +
+          "are not supported by reliable evidence.",
+        choices: [
+          {
+            text: "Avoid sharing the claim and consult a healthcare professional about treatment.",
+            safe: true,
+            feedback:
+              "Correct. Verified information and professional " +
+              "guidance support safer decisions."
+          },
+          {
+            text: "Share the claim anyway because it is popular.",
+            safe: false,
+            feedback:
+              "Popularity does not establish medical accuracy."
+          },
+          {
+            text: "Replace prescribed treatment with the product.",
+            safe: false,
+            feedback:
+              "Unverified products should not replace " +
+              "evidence-based treatment."
+          }
+        ]
+      }
+    ]
+  }
+};
+
+
+// 2. SIMULATOR GAME VARIABLES
+
+let simCurrentTopic = null;
+let simCurrentStep = 0;
+let simPoints = 0;
+let simAnswered = false;
+
+// 3. FIND THE HTML ELEMENTS
+
+const simSection = document.getElementById("simulatorSection");
+const simHome = document.getElementById("simHome");
+const simGame = document.getElementById("simGame");
+const simResults = document.getElementById("simResults");
+const simChoices = document.getElementById("simChoices");
+const simNext = document.getElementById("simNext");
+
+// 4. SHOW THE SIMULATOR HOME
+
+function openSimulator() {
+  // Hide the other features
+  document.getElementById("courses").hidden = true;
+  document.querySelector(".stats-grid").hidden = true;
+  document.querySelector(".welcome-banner").hidden = true;
+  lessonPanel.hidden = true;
+  mythFactSection.hidden = true;
+
+  // Show the simulator
+  simSection.hidden = false;
+  simHome.hidden = false;
+  simGame.hidden = true;
+  simResults.hidden = true;
+
+  simSection.scrollIntoView({ behavior: "smooth" });
+}
+
+// 5. START A SCENARIO
+
+function startSimulation(topicId) {
+  if (!simulatorCases[topicId]) return;
+
+  simCurrentTopic = topicId;
+  simCurrentStep = 0;
+  simPoints = 0;
+
+  simHome.hidden = true;
+  simGame.hidden = false;
+  simResults.hidden = true;
+
+  document.getElementById("simTopicName").textContent =
+    simulatorCases[topicId].title;
+
+  showSimulationStep();
+}
+
+// 6. DISPLAY THE CURRENT DECISION
+
+function showSimulationStep() {
+  const scenario = simulatorCases[simCurrentTopic];
+  const step = scenario.steps[simCurrentStep];
+  const total = scenario.steps.length;
+
+  simAnswered = false;
+
+  document.getElementById("simCaseTitle").textContent =
+    step.title;
+
+  document.getElementById("simSituation").textContent =
+    step.situation;
+
+  document.getElementById("simStepLabel").textContent =
+    `Decision ${simCurrentStep + 1} of ${total}`;
+
+  document.getElementById("simScore").textContent =
+    `${simPoints} / ${total * 10} points`;
+
+  const percent = Math.round(
+    (simCurrentStep / total) * 100
+  );
+
+  document.getElementById("simPercent").textContent =
+    `${percent}%`;
+
+  document.getElementById("simProgressFill").style.width =
+    `${percent}%`;
+
+  // Remove the previous answer buttons
+  simChoices.innerHTML = "";
+
+  // Create the new answer buttons
+  step.choices.forEach((choice, index) => {
+    const button = document.createElement("button");
+
+    button.className = "sim-choice";
+    button.textContent =
+      `${String.fromCharCode(65 + index)}. ${choice.text}`;
+
+    button.addEventListener("click", () => {
+      selectSimulationChoice(index);
+    });
+
+    simChoices.appendChild(button);
+  });
+
+  document.getElementById("simFeedback").hidden = true;
+  simNext.hidden = true;
+
+  simNext.textContent =
+    simCurrentStep === total - 1
+      ? "View Results →"
+      : "Continue →";
+}
+
+// 7. CHECK THE SELECTED DECISION
+
+function selectSimulationChoice(choiceIndex) {
+  if (simAnswered) return;
+
+  simAnswered = true;
+
+  const step =
+    simulatorCases[simCurrentTopic].steps[simCurrentStep];
+
+  const choice = step.choices[choiceIndex];
+
+  if (choice.safe) {
+    simPoints += 10;
+  }
+
+  // Highlight the selected answer
+  const buttons = simChoices.querySelectorAll(".sim-choice");
+
+  buttons.forEach((button, index) => {
+    button.disabled = true;
+
+    if (index === choiceIndex) {
+      button.classList.add("selected");
+    }
+  });
+
+  // Display feedback
+  const feedback = document.getElementById("simFeedback");
+
+  feedback.hidden = false;
+  feedback.className = choice.safe
+    ? "sim-feedback safe"
+    : "sim-feedback unsafe";
+
+  document.getElementById("simFeedbackTitle").textContent =
+    choice.safe
+      ? "Good Decision! +10 Points"
+      : "Let's Review This Decision";
+
+  document.getElementById("simFeedbackText").textContent =
+    choice.feedback;
+
+  document.getElementById("simScore").textContent =
+    `${simPoints} / 30 points`;
+
+  simNext.hidden = false;
+}
+
+// 8. CONTINUE TO THE NEXT DECISION
+
+function nextSimulationStep() {
+  if (!simAnswered) return;
+
+  const total =
+    simulatorCases[simCurrentTopic].steps.length;
+
+  if (simCurrentStep < total - 1) {
+    simCurrentStep++;
+    showSimulationStep();
+  } else {
+    showSimulationResults();
+  }
+}
+
+// 9. DISPLAY THE RESULTS
+
+function showSimulationResults() {
+  simGame.hidden = true;
+  simResults.hidden = false;
+
+  const total =
+    simulatorCases[simCurrentTopic].steps.length;
+
+  const maximum = total * 10;
+  const percentage = Math.round(
+    (simPoints / maximum) * 100
+  );
+
+  document.getElementById("simFinalScore").textContent =
+    `${simPoints} / ${maximum} (${percentage}%)`;
+
+  let message;
+
+  if (percentage === 100) {
+    message =
+      "Excellent! You selected the preferred response in every situation.";
+  } else if (percentage >= 60) {
+    message =
+      "Good effort! Review the feedback to strengthen your decisions.";
+  } else {
+    message =
+      "Keep learning! Review the health lessons and try again.";
+  }
+
+  document.getElementById("simResultMessage").textContent =
+    message;
+
+  document.getElementById("simProgressFill").style.width =
+    "100%";
+
+  simResults.scrollIntoView({ behavior: "smooth" });
+}
+
+// 10. CONNECT THE BUTTONS
+
+document.querySelectorAll(".sim-topic-card").forEach(button => {
+  button.addEventListener("click", () => {
+    startSimulation(button.dataset.scenario);
+  });
+});
+
+simNext.addEventListener("click", nextSimulationStep);
+
+document.getElementById("simReplay")
+  .addEventListener("click", () => {
+    startSimulation(simCurrentTopic);
+  });
+
+document.getElementById("simChoose")
+  .addEventListener("click", openSimulator);
+
+document.getElementById("simBack")
+  .addEventListener("click", () => {
+    restoreDashboard();
+  });

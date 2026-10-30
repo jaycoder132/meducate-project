@@ -41,6 +41,10 @@
           <span>★</span> Challenges
         </a>
 
+        <a href="#" class="nav-link" data-section="simulator">
+          <span>◇</span> Health Simulator
+        </a>
+
         <a href="#" class="nav-link" data-section="progress">
           <span>◷</span> My Progress
         </a>
@@ -460,6 +464,130 @@
 
       </section>
 
+
+      <!-- PART 04: HEALTH DECISION SIMULATOR -->
+      <section id="simulatorSection" class="simulator-section" hidden>
+
+        <button id="simBack" class="back-button">
+          ← Back to Dashboard
+        </button>
+
+        <div class="sim-heading">
+          <p class="eyebrow">MEDUCATE INTERACTIVE SIMULATOR</p>
+          <h2>Real-Life Health Decision Simulator</h2>
+          <p>
+            Practice making safer health decisions through
+            interactive fictional patient scenarios.
+          </p>
+        </div>
+
+        <!-- SCREEN 1: SCENARIO SELECTION -->
+        <div id="simHome">
+          <div class="sim-banner">
+            <span>LEARN THROUGH REAL-LIFE SITUATIONS</span>
+            <h3>What Would You Do?</h3>
+            <p>
+              Explore a patient scenario, make three decisions,
+              and discover the reasoning behind each choice.
+            </p>
+          </div>
+
+          <h3>Choose a Patient Scenario</h3>
+
+          <div class="sim-topic-grid">
+            <button class="sim-topic-card" data-scenario="hypertension">
+              <span class="sim-topic-icon">♥</span>
+              <strong>Hypertension</strong>
+              <small>Home Blood Pressure Monitoring</small>
+              <span>Start Scenario →</span>
+            </button>
+
+            <button class="sim-topic-card" data-scenario="diabetes">
+              <span class="sim-topic-icon">✚</span>
+              <strong>Diabetes Mellitus</strong>
+              <small>Recognizing Low Blood Sugar</small>
+              <span>Start Scenario →</span>
+            </button>
+
+            <button class="sim-topic-card" data-scenario="medication">
+              <span class="sim-topic-icon">✚</span>
+              <strong>Medication Safety</strong>
+              <small>Understanding Prescriptions</small>
+              <span>Start Scenario →</span>
+            </button>
+
+            <button class="sim-topic-card" data-scenario="literacy">
+              <span class="sim-topic-icon">◎</span>
+              <strong>Digital Health Literacy</strong>
+              <small>Evaluating Online Medical Claims</small>
+              <span>Start Scenario →</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- SCREEN 2: INTERACTIVE SCENARIO -->
+        <div id="simGame" hidden>
+
+          <div class="sim-status">
+            <span id="simTopicName"></span>
+            <span id="simScore">0 / 30 points</span>
+          </div>
+
+          <div class="sim-progress-label">
+            <span id="simStepLabel">Decision 1 of 3</span>
+            <span id="simPercent">0%</span>
+          </div>
+
+          <div class="sim-progress-track">
+            <div id="simProgressFill"></div>
+          </div>
+
+          <div class="sim-case-card">
+            <span class="sim-case-label">PATIENT SCENARIO</span>
+            <h3 id="simCaseTitle"></h3>
+            <p id="simSituation"></p>
+
+            <div class="sim-question-box">
+              <h4>What would you do?</h4>
+              <div id="simChoices"></div>
+            </div>
+
+            <div id="simFeedback" class="sim-feedback"
+                aria-live="polite" hidden>
+              <h4 id="simFeedbackTitle"></h4>
+              <p id="simFeedbackText"></p>
+            </div>
+
+            <button id="simNext" class="sim-next-button" hidden>
+              Continue →
+            </button>
+          </div>
+        </div>
+
+        <!-- SCREEN 3: RESULTS -->
+        <div id="simResults" class="sim-results" hidden>
+          <div class="sim-result-icon">✓</div>
+
+          <h2>Scenario Completed!</h2>
+          <p>You finished all three health decisions.</p>
+
+          <h3 id="simFinalScore">0 / 30</h3>
+          <p id="simResultMessage"></p>
+
+          <div class="sim-result-actions">
+            <button id="simReplay" class="sim-next-button">
+              Try Again ↻
+            </button>
+
+            <button id="simChoose" class="secondary-button">
+              Choose Another Scenario
+            </button>
+          </div>
+        </div>
+
+      </section>
+
+      
       <footer class="footer">
         Meducate | Nursing Informatics Educational Project
       </footer>
