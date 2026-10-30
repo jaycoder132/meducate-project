@@ -525,3 +525,234 @@ h1 {
     display: none;
   }
 }
+
+
+/* =====================================
+   PART 02 - INTERACTIVE LEARNING MODULES
+===================================== */
+
+/* Module heading */
+.module-header {
+  margin-bottom: 25px;
+}
+
+.module-header h2 {
+  font-size: 28px;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+
+/* Module progress */
+.module-progress {
+  margin-bottom: 28px;
+}
+
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: var(--teal);
+}
+
+.module-progress .progress-track {
+  height: 10px;
+  margin-top: 0;
+}
+
+/* Two-column learning layout */
+.module-layout {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 25px;
+  align-items: start;
+}
+
+/* Lesson navigation sidebar */
+.lesson-sidebar {
+  background: var(--mint);
+  border-radius: 16px;
+  padding: 20px;
+}
+
+.lesson-sidebar h3 {
+  font-size: 14px;
+  margin-bottom: 18px;
+}
+
+.lesson-nav-button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: white;
+  color: var(--text);
+  border: 1px solid var(--light-teal);
+  padding: 13px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  font-size: 12px;
+}
+
+.lesson-nav-button:hover,
+.lesson-nav-button.selected {
+  background: var(--teal);
+  color: white;
+}
+
+/* Main lesson content */
+.lesson-content {
+  background: #f8fcfc;
+  border: 1px solid var(--light-teal);
+  padding: 28px;
+  border-radius: 16px;
+  min-width: 0;
+}
+
+.lesson-badge {
+  display: inline-block;
+  background: var(--light-teal);
+  color: var(--dark-teal);
+  padding: 7px 13px;
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.lesson-content h2 {
+  font-size: 23px;
+  margin-bottom: 18px;
+}
+
+.lesson-content p,
+.lesson-content li {
+  font-size: 13px;
+  line-height: 1.9;
+  color: var(--text);
+}
+
+.lesson-content ul {
+  padding-left: 22px;
+}
+
+.lesson-content li {
+  margin-bottom: 10px;
+}
+
+/* Highlighted learning tip */
+.health-tip {
+  background: #e2f4ef;
+  border-left: 4px solid var(--teal);
+  border-radius: 10px;
+  padding: 18px;
+  margin-top: 20px;
+}
+
+.health-tip strong {
+  color: var(--dark-teal);
+}
+
+.health-tip p {
+  margin: 8px 0 0;
+}
+
+/* Knowledge check */
+.knowledge-check {
+  margin-top: 25px;
+  background: white;
+  padding: 22px;
+  border-radius: 14px;
+  border: 1px solid var(--light-teal);
+}
+
+.knowledge-check h3 {
+  font-size: 17px;
+}
+
+.answer-option {
+  display: block;
+  width: 100%;
+  background: var(--mint);
+  border: 1px solid var(--light-teal);
+  padding: 13px;
+  border-radius: 10px;
+  text-align: left;
+  margin-bottom: 10px;
+  font-size: 12px;
+}
+
+.answer-option:hover,
+.answer-option.chosen {
+  background: var(--light-teal);
+  border-color: var(--teal);
+}
+
+#answerFeedback {
+  margin-top: 15px;
+  font-weight: 600;
+}
+
+#answerFeedback.correct {
+  color: #167347;
+}
+
+#answerFeedback.incorrect {
+  color: #a34d29;
+}
+
+/* Previous and Next buttons */
+.lesson-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.secondary-button {
+  background: white;
+  border: 1px solid var(--teal);
+  color: var(--teal);
+  padding: 12px 18px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.secondary-button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Adjust for smaller screens */
+@media (max-width: 1100px) {
+  .module-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .lesson-sidebar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .lesson-sidebar h3 {
+    width: 100%;
+  }
+
+  .lesson-nav-button {
+    width: auto;
+    flex: 1;
+    margin: 0;
+  }
+}
+
+@media (max-width: 700px) {
+  .lesson-content {
+    padding: 18px;
+  }
+
+  .lesson-actions {
+    flex-direction: column;
+  }
+}

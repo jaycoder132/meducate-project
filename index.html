@@ -228,25 +228,79 @@
         </p>
       </section>
 
-      <!-- LEARNING PANEL -->
+      
+    <!-- INTERACTIVE LEARNING MODULE -->
       <section id="lessonPanel" class="lesson-panel" hidden>
+
         <button id="backButton" class="back-button">
-          ← Back to Topics
+          ← Back to Health Topics
         </button>
 
-        <p class="eyebrow">MEDUCATE LEARNING MODULE</p>
-        <h2 id="lessonTitle"></h2>
-        <p id="lessonDescription"></p>
-
-        <div class="lesson-box">
-          <h3>What You'll Learn</h3>
-          <ul id="lessonPoints"></ul>
+        <div class="module-header">
+          <p class="eyebrow">MEDUCATE LEARNING MODULE</p>
+          <h2 id="lessonTitle">Health Topic</h2>
+          <p id="lessonDescription"></p>
         </div>
 
-        <button id="completeButton" class="complete-button">
-          Mark Topic as Completed ✓
+        <!-- LESSON PROGRESS -->
+        <div class="module-progress">
+          <div class="progress-info">
+            <span id="lessonCounter">Lesson 1 of 4</span>
+            <span id="lessonPercentage">0%</span>
+          </div>
+
+          <div class="progress-track">
+            <div class="progress-fill" id="lessonProgressBar"></div>
+          </div>
+        </div>
+
+        <div class="module-layout">
+
+          <!-- LESSON NAVIGATION -->
+          <aside class="lesson-sidebar">
+            <h3>Module Contents</h3>
+            <div id="lessonNavigation"></div>
+          </aside>
+
+          <!-- LESSON CONTENT -->
+          <div class="lesson-content">
+
+            <div class="lesson-badge" id="lessonBadge">
+              LESSON 01
+            </div>
+
+            <h2 id="contentTitle"></h2>
+
+            <div id="contentBody"></div>
+
+            <!-- INTERACTIVE KNOWLEDGE CHECK -->
+            <div id="knowledgeCheck" class="knowledge-check" hidden>
+              <h3>Quick Knowledge Check</h3>
+              <p id="questionText"></p>
+
+              <div id="answerOptions"></div>
+
+              <button id="checkAnswerButton" class="complete-button">
+                Check Answer
+              </button>
+
+              <p id="answerFeedback" aria-live="polite"></p>
+            </div>
+
+            <!-- NAVIGATION BUTTONS -->
+            <div class="lesson-actions">
+              <button id="previousButton" class="secondary-button">
+                ← Previous
+              </button>
+
+              <button id="nextButton" class="complete-button">
+                Next Lesson →
         </button>
+            </div>
+          </div>
+        </div>
       </section>
+
 
       <footer class="footer">
         Meducate | Nursing Informatics Educational Project
@@ -256,6 +310,6 @@
   </div>
 
   <!-- Our JavaScript file -->
-  <script src="script.js"></script>
+  <script src="./js/script.js"></script>
 </body>
 </html>

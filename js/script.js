@@ -1,205 +1,581 @@
 
-// MEDUCATE - DASHBOARD INTERACTIONS
+// =======================================
+// MEDUCATE - PART 02
+// Interactive Health Learning Modules
+// =======================================
 
-// 1. Our health topic information
+// 1. EDUCATIONAL CONTENT
+
 const topics = {
   hypertension: {
     title: "Hypertension",
-    description: "Learn the basics of high blood pressure.",
-    points: [
-      "What hypertension means",
-      "Common risk factors",
-      "Why blood pressure monitoring matters",
-      "Healthy habits that support blood pressure control"
-    ]
+    description: "Understanding high blood pressure and heart health.",
+    lessons: [
+      {
+        title: "What Is Hypertension?",
+        text: "Hypertension means blood pressure that stays too high over time. Blood pressure measures the force of blood against artery walls.",
+        points: [
+          "Blood pressure is recorded using two numbers.",
+          "Systolic pressure is the top number.",
+          "Diastolic pressure is the bottom number.",
+          "Hypertension often has no noticeable symptoms."
+        ],
+        tip: "Regular blood pressure measurement is important because you may feel well even when your blood pressure is high."
+      },
+      {
+        title: "Risk Factors",
+        text: "Some factors increase the likelihood of developing hypertension.",
+        points: [
+          "High sodium intake",
+          "Physical inactivity",
+          "Excess body weight",
+          "Smoking and excessive alcohol consumption",
+          "Family history and increasing age"
+        ],
+        tip: "Some risk factors cannot be changed, but healthy lifestyle choices can help lower risk."
+      },
+      {
+        title: "Prevention and Management",
+        text: "Healthy habits and appropriate medical care can help control blood pressure.",
+        points: [
+          "Eat a balanced diet with less sodium.",
+          "Exercise regularly as appropriate.",
+          "Avoid smoking.",
+          "Monitor blood pressure as advised.",
+          "Take prescribed medicines as directed."
+        ],
+        tip: "Do not stop blood pressure medication without consulting your healthcare professional."
+      }
+    ],
+    question: {
+      text: "Which statement about hypertension is correct?",
+      options: [
+        "Hypertension always causes headaches.",
+        "Hypertension may have no noticeable symptoms.",
+        "Medication can be stopped when you feel better."
+      ],
+      correct: 1,
+      explanation: "Correct. Many people with hypertension have no symptoms, so regular monitoring is important."
+    }
   },
 
   diabetes: {
     title: "Diabetes Mellitus",
-    description: "Understand diabetes and everyday self-care.",
-    points: [
-      "What diabetes mellitus means",
-      "The importance of blood glucose monitoring",
-      "Healthy eating and physical activity",
-      "Recognizing signs that need medical attention"
-    ]
+    description: "Understanding blood glucose and diabetes self-care.",
+    lessons: [
+      {
+        title: "What Is Diabetes?",
+        text: "Diabetes is a chronic condition in which blood glucose becomes too high because the body does not make enough insulin or cannot use insulin effectively.",
+        points: [
+          "Insulin helps glucose enter body cells.",
+          "Type 1 and type 2 diabetes have different causes.",
+          "High blood glucose can damage organs over time.",
+          "Diabetes requires appropriate ongoing management."
+        ],
+        tip: "Diabetes management plans differ from person to person."
+      },
+      {
+        title: "Common Symptoms",
+        text: "Some people with diabetes experience symptoms, while others may have few or none.",
+        points: [
+          "Frequent urination",
+          "Increased thirst",
+          "Unexplained weight loss",
+          "Fatigue",
+          "Blurred vision"
+        ],
+        tip: "Symptoms alone cannot confirm diabetes. A healthcare professional may recommend blood tests."
+      },
+      {
+        title: "Healthy Diabetes Management",
+        text: "Diabetes care includes education, healthy habits, monitoring, and prescribed treatment.",
+        points: [
+          "Follow an individualized meal plan.",
+          "Stay physically active as appropriate.",
+          "Monitor glucose when recommended.",
+          "Take prescribed medicines correctly.",
+          "Attend regular healthcare appointments."
+        ],
+        tip: "Do not replace prescribed diabetes treatment with unverified online remedies."
+      }
+    ],
+    question: {
+      text: "Which action supports safe diabetes management?",
+      options: [
+        "Stop medication when symptoms disappear.",
+        "Use an online cure instead of prescribed treatment.",
+        "Follow the care plan recommended by your healthcare team."
+      ],
+      correct: 2,
+      explanation: "Correct. Following an individualized care plan helps support safe diabetes management."
+    }
   },
 
   medication: {
     title: "Medication Safety",
-    description: "Learn how to use medicines more safely.",
-    points: [
-      "Understanding medication labels",
-      "Following prescribed medication instructions",
-      "Avoiding unsafe self-medication",
-      "When to ask a pharmacist or healthcare professional"
-    ]
+    description: "Understanding safe medicine use and medication labels.",
+    lessons: [
+      {
+        title: "Understanding Medication Labels",
+        text: "Medication labels provide important instructions for using medicines safely.",
+        points: [
+          "Check the medicine name.",
+          "Read the prescribed dose and instructions.",
+          "Check the expiration date.",
+          "Review warnings and storage instructions.",
+          "Ask a pharmacist about unclear directions."
+        ],
+        tip: "Never guess a medicine's dose when the label or instructions are unclear."
+      },
+      {
+        title: "Safe Medication Practices",
+        text: "Following correct medication practices helps prevent avoidable harm.",
+        points: [
+          "Take medicines according to the prescription.",
+          "Do not share prescription medicines.",
+          "Keep an updated medication list.",
+          "Ask before combining medicines or supplements.",
+          "Store medicines safely away from children."
+        ],
+        tip: "Ask a healthcare professional what to do if you miss a dose; instructions depend on the medicine."
+      },
+      {
+        title: "Avoiding Medication Misinformation",
+        text: "Not all medication advice found online is reliable.",
+        points: [
+          "Be cautious about miracle-cure advertisements.",
+          "Check the source of medication information.",
+          "Avoid buying medicines from suspicious sellers.",
+          "Do not change treatment based only on social media.",
+          "Consult a licensed healthcare professional."
+        ],
+        tip: "A product being called natural does not automatically make it safe."
+      }
+    ],
+    question: {
+      text: "What should you do if medication instructions are unclear?",
+      options: [
+        "Guess the correct dose.",
+        "Ask a pharmacist or healthcare professional.",
+        "Follow a random social media comment."
+      ],
+      correct: 1,
+      explanation: "Correct. A pharmacist or healthcare professional can clarify medication instructions."
+    }
   },
 
   literacy: {
     title: "Digital Health Literacy",
-    description: "Learn how to find and evaluate health information.",
-    points: [
-      "Finding trustworthy health websites",
-      "Recognizing misleading health claims",
-      "Checking the author, date, and evidence",
-      "Protecting personal health information online"
-    ]
+    description: "Finding, understanding, and evaluating online health information.",
+    lessons: [
+      {
+        title: "What Is Digital Health Literacy?",
+        text: "Digital health literacy involves finding, understanding, evaluating, and using health information from digital sources.",
+        points: [
+          "Searching for health information online",
+          "Understanding digital health resources",
+          "Evaluating the credibility of information",
+          "Using information to support informed decisions"
+        ],
+        tip: "Online information can support learning, but it does not replace individualized professional care."
+      },
+      {
+        title: "Identifying Reliable Sources",
+        text: "Reliable health resources should provide accurate, transparent, and evidence-based information.",
+        points: [
+          "Check who wrote or reviewed the information.",
+          "Look for credible medical organizations.",
+          "Check the publication or review date.",
+          "Look for supporting scientific evidence.",
+          "Compare important claims with trusted sources."
+        ],
+        tip: "A professional-looking website is not automatically a trustworthy source."
+      },
+      {
+        title: "Recognizing Misinformation",
+        text: "Health misinformation includes false or misleading claims that may influence health decisions.",
+        points: [
+          "Watch for claims of guaranteed cures.",
+          "Be cautious about sensational headlines.",
+          "Check whether evidence is provided.",
+          "Avoid sharing unverified medical claims.",
+          "Protect personal health information online."
+        ],
+        tip: "Before sharing a health claim, verify it using trustworthy sources."
+      }
+    ],
+    question: {
+      text: "Which is a good way to check online health information?",
+      options: [
+        "Trust a post because it has many likes.",
+        "Believe every advertisement with testimonials.",
+        "Check the author, evidence, date, and source."
+      ],
+      correct: 2,
+      explanation: "Correct. Checking the author, evidence, date, and source helps evaluate credibility."
+    }
   }
 };
 
-// 2. Save completed topics in this browser
-const storageKey = "healthwise-completed";
+
+// 2. SAVED PROGRESS
+
+const storageKey = "meducate-completed";
 let completed = [];
 
 try {
-  completed = JSON.parse(localStorage.getItem(storageKey)) || [];
-  if (!Array.isArray(completed)) completed = [];
+  const saved = JSON.parse(localStorage.getItem(storageKey));
+  if (Array.isArray(saved)) {
+    completed = saved.filter(id => topics[id]);
+  }
 } catch {
   completed = [];
 }
 
-// 3. Find important HTML elements
+
+// 3. FIND HTML ELEMENTS
+
 const searchInput = document.getElementById("searchInput");
 const categoryFilter = document.getElementById("categoryFilter");
 const courseCards = document.querySelectorAll(".course-card");
-const courseGrid = document.getElementById("courseGrid");
+
 const lessonPanel = document.getElementById("lessonPanel");
 const lessonTitle = document.getElementById("lessonTitle");
 const lessonDescription = document.getElementById("lessonDescription");
-const lessonPoints = document.getElementById("lessonPoints");
+
+const contentTitle = document.getElementById("contentTitle");
+const contentBody = document.getElementById("contentBody");
+
+const knowledgeCheck = document.getElementById("knowledgeCheck");
+const questionText = document.getElementById("questionText");
+const answerOptions = document.getElementById("answerOptions");
+const answerFeedback = document.getElementById("answerFeedback");
+
+const previousButton = document.getElementById("previousButton");
+const nextButton = document.getElementById("nextButton");
 
 let currentTopic = null;
+let currentLesson = 0;
+let selectedAnswer = null;
+let answerChecked = false;
 
-// 4. Search and filter health topics
+
+// 4. SEARCH AND FILTER
+
 function filterTopics() {
   const search = searchInput.value.toLowerCase().trim();
   const category = categoryFilter.value;
-  let visibleCount = 0;
+  let visible = 0;
 
   courseCards.forEach(card => {
-    const title = card.dataset.title;
-    const cardCategory = card.dataset.category;
-
-    const matchesSearch = title.includes(search);
+    const matchesSearch = card.dataset.title.includes(search);
     const matchesCategory =
-      category === "all" || category === cardCategory;
+      category === "all" || card.dataset.category === category;
 
-    const show = matchesSearch && matchesCategory;
+    card.hidden = !(matchesSearch && matchesCategory);
 
-    card.hidden = !show;
-
-    if (show) visibleCount++;
+    if (!card.hidden) visible++;
   });
 
   document.getElementById("topicCount").textContent =
-    `${visibleCount} topic${visibleCount === 1 ? "" : "s"}`;
+    `${visible} topic${visible === 1 ? "" : "s"}`;
 
-  document.getElementById("emptyMessage").hidden =
-    visibleCount !== 0;
+  document.getElementById("emptyMessage").hidden = visible > 0;
 }
 
 searchInput.addEventListener("input", filterTopics);
 categoryFilter.addEventListener("change", filterTopics);
 
-// 5. Open a learning topic
+
+// 5. OPEN A TOPIC
+
 function openTopic(topicId) {
-  const topic = topics[topicId];
-  if (!topic) return;
+  if (!topics[topicId]) return;
 
   currentTopic = topicId;
+  currentLesson = 0;
 
-  lessonTitle.textContent = topic.title;
-  lessonDescription.textContent = topic.description;
+  lessonTitle.textContent = topics[topicId].title;
+  lessonDescription.textContent = topics[topicId].description;
 
-  // Clear the previous topic's learning points
-  lessonPoints.innerHTML = "";
-
-  // Add the new topic's learning points
-  topic.points.forEach(point => {
-    const item = document.createElement("li");
-    item.textContent = point;
-    lessonPoints.appendChild(item);
-  });
-
-  document.getElementById("completeButton").textContent =
-    completed.includes(topicId)
-      ? "Completed ✓"
-      : "Mark Topic as Completed ✓";
-
-  courseGrid.parentElement.hidden = true;
+  document.getElementById("courses").hidden = true;
   lessonPanel.hidden = false;
 
+  showLesson();
   lessonPanel.scrollIntoView({ behavior: "smooth" });
 }
 
-// 6. Connect the Start Learning buttons
+
+// 6. DISPLAY A LESSON
+
+function showLesson() {
+  const topic = topics[currentTopic];
+  const totalSteps = topic.lessons.length + 1;
+
+  const isQuestion = currentLesson === topic.lessons.length;
+
+  const percentage = Math.round(
+    (currentLesson / totalSteps) * 100
+  );
+
+  document.getElementById("lessonCounter").textContent =
+    `Step ${currentLesson + 1} of ${totalSteps}`;
+
+  document.getElementById("lessonPercentage").textContent =
+    percentage + "%";
+
+  document.getElementById("lessonProgressBar").style.width =
+    percentage + "%";
+
+  // Build the lesson navigation
+  const navigation = document.getElementById("lessonNavigation");
+  navigation.innerHTML = "";
+
+  const names = topic.lessons.map(lesson => lesson.title);
+  names.push("Knowledge Check");
+
+  names.forEach((name, index) => {
+    const button = document.createElement("button");
+
+    button.className = "lesson-nav-button";
+    button.textContent = `${index + 1}. ${name}`;
+
+    if (index === currentLesson) {
+      button.classList.add("selected");
+    }
+
+    button.addEventListener("click", () => {
+      currentLesson = index;
+      showLesson();
+    });
+
+    navigation.appendChild(button);
+  });
+
+  // Show lesson or knowledge check
+  if (!isQuestion) {
+    const lesson = topic.lessons[currentLesson];
+
+    document.getElementById("lessonBadge").textContent =
+      `LESSON ${String(currentLesson + 1).padStart(2, "0")}`;
+
+    contentTitle.textContent = lesson.title;
+    contentBody.innerHTML = "";
+
+    const paragraph = document.createElement("p");
+    paragraph.textContent = lesson.text;
+    contentBody.appendChild(paragraph);
+
+    const list = document.createElement("ul");
+
+    lesson.points.forEach(point => {
+      const item = document.createElement("li");
+      item.textContent = point;
+      list.appendChild(item);
+    });
+
+    contentBody.appendChild(list);
+
+    const tip = document.createElement("div");
+    tip.className = "health-tip";
+
+    const tipTitle = document.createElement("strong");
+    tipTitle.textContent = "Health Tip";
+
+    const tipText = document.createElement("p");
+    tipText.textContent = lesson.tip;
+
+    tip.appendChild(tipTitle);
+    tip.appendChild(tipText);
+    contentBody.appendChild(tip);
+
+    knowledgeCheck.hidden = true;
+
+  } else {
+    document.getElementById("lessonBadge").textContent =
+      "KNOWLEDGE CHECK";
+
+    contentTitle.textContent = "Test Your Knowledge";
+    contentBody.innerHTML = "";
+
+    knowledgeCheck.hidden = false;
+    showQuestion();
+  }
+
+  previousButton.disabled = currentLesson === 0;
+
+  nextButton.textContent = isQuestion
+    ? "Finish Module ✓"
+    : "Next Lesson →";
+
+  nextButton.disabled = isQuestion && !answerChecked;
+}
+
+
+// 7. DISPLAY THE KNOWLEDGE CHECK
+
+function showQuestion() {
+  const question = topics[currentTopic].question;
+
+  selectedAnswer = null;
+  answerChecked = false;
+
+  questionText.textContent = question.text;
+  answerOptions.innerHTML = "";
+  answerFeedback.textContent = "";
+  answerFeedback.className = "";
+
+  question.options.forEach((option, index) => {
+    const button = document.createElement("button");
+
+    button.className = "answer-option";
+    button.textContent = option;
+
+    button.addEventListener("click", () => {
+      if (answerChecked) return;
+
+      selectedAnswer = index;
+
+      document.querySelectorAll(".answer-option").forEach(btn => {
+        btn.classList.remove("chosen");
+      });
+
+      button.classList.add("chosen");
+    });
+
+    answerOptions.appendChild(button);
+  });
+}
+
+
+// 8. CHECK THE ANSWER
+
+document.getElementById("checkAnswerButton")
+  .addEventListener("click", () => {
+
+    if (selectedAnswer === null) {
+      answerFeedback.textContent = "Please select an answer first.";
+      return;
+    }
+
+    const question = topics[currentTopic].question;
+    const correct = selectedAnswer === question.correct;
+
+    answerFeedback.textContent = correct
+      ? question.explanation
+      : "Not quite. " + question.explanation;
+
+    answerFeedback.className = correct
+      ? "correct"
+      : "incorrect";
+
+    answerChecked = true;
+    nextButton.disabled = false;
+  });
+
+
+// 9. PREVIOUS AND NEXT BUTTONS
+
+previousButton.addEventListener("click", () => {
+  if (currentLesson > 0) {
+    currentLesson--;
+    showLesson();
+  }
+});
+
+nextButton.addEventListener("click", () => {
+  const totalLessons = topics[currentTopic].lessons.length;
+
+  if (currentLesson < totalLessons) {
+    currentLesson++;
+    showLesson();
+  } else if (answerChecked) {
+    completeModule();
+  }
+});
+
+
+// 10. COMPLETE THE MODULE
+
+function completeModule() {
+  if (!completed.includes(currentTopic)) {
+    completed.push(currentTopic);
+
+    localStorage.setItem(
+      storageKey,
+      JSON.stringify(completed)
+    );
+  }
+
+  updateProgress();
+
+  document.getElementById("lessonProgressBar").style.width = "100%";
+  document.getElementById("lessonPercentage").textContent = "100%";
+
+  alert("Congratulations! You completed this Meducate module.");
+
+  returnToDashboard();
+}
+
+
+// 11. UPDATE DASHBOARD PROGRESS
+
+function updateProgress() {
+  const total = Object.keys(topics).length;
+  const count = completed.length;
+  const percentage = Math.round((count / total) * 100);
+
+  document.getElementById("totalTopics").textContent = total;
+  document.getElementById("completedTopics").textContent = count;
+  document.getElementById("progressPercent").textContent =
+    percentage + "%";
+
+  Object.keys(topics).forEach(id => {
+    const done = completed.includes(id);
+
+    document.getElementById(`bar-${id}`).style.width =
+      done ? "100%" : "0%";
+
+    document.getElementById(`status-${id}`).textContent =
+      done ? "Completed" : "Not Started";
+
+    const button = document.querySelector(
+      `.course-button[data-topic="${id}"]`
+    );
+
+    button.textContent = done
+      ? "Review Topic →"
+      : "Start Learning →";
+  });
+}
+
+
+// 12. RETURN TO DASHBOARD
+
+function returnToDashboard() {
+  lessonPanel.hidden = true;
+  document.getElementById("courses").hidden = false;
+
+  document.getElementById("courses").scrollIntoView({
+    behavior: "smooth"
+  });
+}
+
+document.getElementById("backButton")
+  .addEventListener("click", returnToDashboard);
+
+
+// 13. CONNECT START LEARNING BUTTONS
+
 document.querySelectorAll(".course-button").forEach(button => {
   button.addEventListener("click", () => {
     openTopic(button.dataset.topic);
   });
 });
 
-// 7. Return to the dashboard
-document.getElementById("backButton").addEventListener("click", () => {
-  lessonPanel.hidden = true;
-  courseGrid.parentElement.hidden = false;
 
-  document.getElementById("courses").scrollIntoView({
-    behavior: "smooth"
-  });
-});
+// 14. MAIN SIDEBAR NAVIGATION
 
-// 8. Complete a topic
-document.getElementById("completeButton").addEventListener("click", () => {
-  if (!currentTopic) return;
-
-  if (!completed.includes(currentTopic)) {
-    completed.push(currentTopic);
-    localStorage.setItem(storageKey, JSON.stringify(completed));
-  }
-
-  updateProgress();
-
-  document.getElementById("completeButton").textContent =
-    "Completed ✓";
-});
-
-// 9. Update dashboard progress
-function updateProgress() {
-  const total = Object.keys(topics).length;
-  const completedCount = completed.filter(id => topics[id]).length;
-
-  const percentage = Math.round(
-    (completedCount / total) * 100
-  );
-
-  document.getElementById("totalTopics").textContent = total;
-  document.getElementById("completedTopics").textContent =
-    completedCount;
-  document.getElementById("progressPercent").textContent =
-    percentage + "%";
-
-  Object.keys(topics).forEach(id => {
-    const isCompleted = completed.includes(id);
-
-    document.getElementById(`bar-${id}`).style.width =
-      isCompleted ? "100%" : "0%";
-
-    document.getElementById(`status-${id}`).textContent =
-      isCompleted ? "Completed" : "Not Started";
-
-    const button = document.querySelector(
-      `.course-button[data-topic="${id}"]`
-    );
-
-    button.textContent = isCompleted
-      ? "Review Topic →"
-      : "Start Learning →";
-  });
-}
-
-// 10. Sidebar navigation
 document.querySelectorAll(".nav-link").forEach(link => {
   link.addEventListener("click", event => {
     event.preventDefault();
@@ -207,17 +583,24 @@ document.querySelectorAll(".nav-link").forEach(link => {
     const section = link.dataset.section;
 
     if (section === "dashboard") {
+      lessonPanel.hidden = true;
+      document.getElementById("courses").hidden = false;
+
       window.scrollTo({ top: 0, behavior: "smooth" });
+
     } else if (section === "topics") {
-      document.getElementById("courses").scrollIntoView({
-        behavior: "smooth"
-      });
+      returnToDashboard();
+
     } else if (section === "progress") {
+      lessonPanel.hidden = true;
+      document.getElementById("courses").hidden = false;
+
       document.querySelector(".stats-grid").scrollIntoView({
         behavior: "smooth"
       });
+
     } else if (section === "challenges") {
-      alert("Myth vs. Fact Challenge is coming in Part 2!");
+      alert("Myth vs. Fact Challenge is coming in Part 03!");
     }
 
     document.querySelectorAll(".nav-link").forEach(item => {
@@ -228,5 +611,7 @@ document.querySelectorAll(".nav-link").forEach(link => {
   });
 });
 
-// 11. Show saved progress when the page opens
+
+// 15. INITIALIZE THE DASHBOARD
+
 updateProgress();
