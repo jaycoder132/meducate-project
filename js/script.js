@@ -946,8 +946,12 @@ function showChallengeResults() {
   const total = challengeQuestions[challengeTopic].length;
   const maximumScore = total * 10;
 
-  document.getElementById("finalScore").textContent =
-    `${challengeScore} / ${maximumScore}`;
+const scorePercentage = Math.round(
+  (challengeScore / maximumScore) * 100
+);
+
+document.getElementById("finalScore").textContent =
+  `${challengeScore} / ${maximumScore} (${scorePercentage}%)`;
 
   const percentage = (challengeScore / maximumScore) * 100;
 
