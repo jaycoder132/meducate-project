@@ -553,8 +553,7 @@ function updateProgress() {
 // 12. RETURN TO DASHBOARD
 
 function returnToDashboard() {
-  lessonPanel.hidden = true;
-  document.getElementById("courses").hidden = false;
+  restoreDashboard();
 
   document.getElementById("courses").scrollIntoView({
     behavior: "smooth"
@@ -583,24 +582,24 @@ document.querySelectorAll(".nav-link").forEach(link => {
     const section = link.dataset.section;
 
     if (section === "dashboard") {
-      lessonPanel.hidden = true;
-      document.getElementById("courses").hidden = false;
+      restoreDashboard();
 
       window.scrollTo({ top: 0, behavior: "smooth" });
 
     } else if (section === "topics") {
-      returnToDashboard();
+      restoreDashboard();
+      document.getElementById("courses").scrollIntoView({
+        behavior: "smooth"
+      });
 
     } else if (section === "progress") {
-      lessonPanel.hidden = true;
-      document.getElementById("courses").hidden = false;
-
+      restoreDashboard();
       document.querySelector(".stats-grid").scrollIntoView({
         behavior: "smooth"
       });
 
     } else if (section === "challenges") {
-      alert("Myth vs. Fact Challenge is coming in Part 03!");
+      openChallengeHome();
     }
 
     document.querySelectorAll(".nav-link").forEach(item => {
@@ -615,3 +614,392 @@ document.querySelectorAll(".nav-link").forEach(link => {
 // 15. INITIALIZE THE DASHBOARD
 
 updateProgress();
+
+
+// =====================================
+// PART 03 - MYTH VS FACT CHALLENGE
+// =====================================
+
+// 1. QUESTION BANK
+const challengeQuestions = {
+
+  hypertension: [
+    {
+      statement: "People with hypertension always have symptoms.",
+      answer: "myth",
+      explanation: "Hypertension often has no noticeable symptoms. Regular blood pressure monitoring is important."
+    },
+    {
+      statement: "Too much sodium can contribute to high blood pressure.",
+      answer: "fact",
+      explanation: "Excessive sodium intake can increase blood pressure. Reducing sodium can support blood pressure control."
+    },
+    {
+      statement: "Only older adults can develop hypertension.",
+      answer: "myth",
+      explanation: "Hypertension can occur in younger adults and even children, although risk generally increases with age."
+    },
+    {
+      statement: "Regular physical activity can help manage blood pressure.",
+      answer: "fact",
+      explanation: "Appropriate regular physical activity can help reduce blood pressure and support cardiovascular health."
+    },
+    {
+      statement: "You should stop prescribed blood pressure medicine when you feel better.",
+      answer: "myth",
+      explanation: "Feeling better does not necessarily mean blood pressure is controlled without treatment. Consult your healthcare professional before changing medication."
+    }
+  ],
+
+  diabetes: [
+    {
+      statement: "Diabetes affects how the body regulates blood glucose.",
+      answer: "fact",
+      explanation: "Diabetes involves problems with insulin production, insulin action, or both, resulting in elevated blood glucose."
+    },
+    {
+      statement: "Everyone with diabetes must avoid all carbohydrates.",
+      answer: "myth",
+      explanation: "Carbohydrates can be part of an individualized diabetes meal plan. Portion sizes and food choices matter."
+    },
+    {
+      statement: "Regular physical activity can support diabetes management.",
+      answer: "fact",
+      explanation: "Physical activity can help improve insulin sensitivity and support overall health."
+    },
+    {
+      statement: "Diabetes always causes obvious symptoms.",
+      answer: "myth",
+      explanation: "Some people, especially those with type 2 diabetes, may have few or no noticeable symptoms."
+    },
+    {
+      statement: "Diabetes can affect the eyes, kidneys, nerves, and heart.",
+      answer: "fact",
+      explanation: "Persistently elevated blood glucose can contribute to complications involving several organs."
+    }
+  ],
+
+  medication: [
+    {
+      statement: "Prescription medicines can be safely shared with family members.",
+      answer: "myth",
+      explanation: "Prescription medicines are selected for individual patients. Sharing them can cause harm."
+    },
+    {
+      statement: "Reading medication labels helps prevent medication errors.",
+      answer: "fact",
+      explanation: "Labels provide important information about dosage, instructions, warnings, and storage."
+    },
+    {
+      statement: "Natural or herbal products are always safe.",
+      answer: "myth",
+      explanation: "Natural products can cause side effects and interact with medicines."
+    },
+    {
+      statement: "A pharmacist can help explain unclear medication instructions.",
+      answer: "fact",
+      explanation: "Pharmacists can clarify how medicines should be used and explain relevant precautions."
+    },
+    {
+      statement: "Taking a larger dose than prescribed makes medicine work better.",
+      answer: "myth",
+      explanation: "Taking more than the prescribed dose can increase the risk of toxicity and other serious adverse effects."
+    }
+  ],
+
+  literacy: [
+    {
+      statement: "A health post with thousands of likes is automatically reliable.",
+      answer: "myth",
+      explanation: "Popularity does not prove accuracy. Medical claims should be checked against trustworthy sources."
+    },
+    {
+      statement: "Checking the author and evidence helps evaluate health information.",
+      answer: "fact",
+      explanation: "Identifying qualified authors and supporting evidence is an important part of evaluating online health information."
+    },
+    {
+      statement: "Every website ending in .com contains false health information.",
+      answer: "myth",
+      explanation: "Website domains alone cannot determine reliability. Evaluate authorship, evidence, transparency, and credibility."
+    },
+    {
+      statement: "Online health misinformation can influence unsafe decisions.",
+      answer: "fact",
+      explanation: "False or misleading health claims may encourage people to delay care or use unsafe treatments."
+    },
+    {
+      statement: "You should verify medical claims before sharing them online.",
+      answer: "fact",
+      explanation: "Checking credible sources before sharing information helps reduce the spread of misinformation."
+    }
+  ]
+
+};
+
+
+// 2. GAME VARIABLES
+let challengeTopic = null;
+let questionIndex = 0;
+let challengeScore = 0;
+let questionAnswered = false;
+
+
+// 3. FIND GAME ELEMENTS
+const mythFactSection =
+  document.getElementById("mythFactSection");
+
+const challengeHome =
+  document.getElementById("challengeHome");
+
+const challengeGame =
+  document.getElementById("challengeGame");
+
+const challengeResults =
+  document.getElementById("challengeResults");
+
+const mythButton =
+  document.getElementById("mythButton");
+
+const factButton =
+  document.getElementById("factButton");
+
+const nextQuestionButton =
+  document.getElementById("nextQuestionButton");
+
+
+// 4. SHOW CHALLENGE HOME
+function openChallengeHome() {
+
+  // Hide dashboard learning content
+  document.getElementById("courses").hidden = true;
+  document.querySelector(".stats-grid").hidden = true;
+  document.querySelector(".welcome-banner").hidden = true;
+  lessonPanel.hidden = true;
+
+  // Show challenge selection
+  mythFactSection.hidden = false;
+  challengeHome.hidden = false;
+  challengeGame.hidden = true;
+  challengeResults.hidden = true;
+
+  mythFactSection.scrollIntoView({
+    behavior: "smooth"
+  });
+}
+
+
+// 5. RESTORE THE DASHBOARD
+function restoreDashboard() {
+
+  mythFactSection.hidden = true;
+
+  document.getElementById("courses").hidden = false;
+  document.querySelector(".stats-grid").hidden = false;
+  document.querySelector(".welcome-banner").hidden = false;
+
+  lessonPanel.hidden = true;
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+}
+
+
+// 6. START A CHALLENGE
+function startChallenge(topicId) {
+
+  if (!challengeQuestions[topicId]) return;
+
+  challengeTopic = topicId;
+  questionIndex = 0;
+  challengeScore = 0;
+  questionAnswered = false;
+
+  challengeHome.hidden = true;
+  challengeResults.hidden = true;
+  challengeGame.hidden = false;
+
+  document.getElementById("gameTopicName").textContent =
+    topics[topicId].title;
+
+  showChallengeQuestion();
+}
+
+
+// 7. DISPLAY A QUESTION
+function showChallengeQuestion() {
+
+  const questions = challengeQuestions[challengeTopic];
+  const question = questions[questionIndex];
+
+  questionAnswered = false;
+
+  document.getElementById("gameStatement").textContent =
+    question.statement;
+
+  document.getElementById("gameScore").textContent =
+    `Score: ${challengeScore}`;
+
+  document.getElementById("gameQuestionCounter").textContent =
+    `Question ${questionIndex + 1} of ${questions.length}`;
+
+  const percentage = Math.round(
+    ((questionIndex + 1) / questions.length) * 100
+  );
+
+  document.getElementById("gameProgressPercent").textContent =
+    `${percentage}%`;
+
+  document.getElementById("gameProgressFill").style.width =
+    `${percentage}%`;
+
+  // Reset buttons
+  mythButton.disabled = false;
+  factButton.disabled = false;
+
+  mythButton.classList.remove("selected");
+  factButton.classList.remove("selected");
+
+  document.getElementById("gameFeedback").hidden = true;
+  nextQuestionButton.hidden = true;
+
+  nextQuestionButton.textContent =
+    questionIndex === questions.length - 1
+      ? "View Results →"
+      : "Next Question →";
+}
+
+
+// 8. CHECK THE PLAYER'S ANSWER
+function submitChallengeAnswer(selectedAnswer) {
+
+  // Prevent answering twice
+  if (questionAnswered) return;
+
+  questionAnswered = true;
+
+  const question =
+    challengeQuestions[challengeTopic][questionIndex];
+
+  const isCorrect = selectedAnswer === question.answer;
+
+  if (isCorrect) {
+    challengeScore += 10;
+  }
+
+  // Highlight selected button
+  const selectedButton =
+    selectedAnswer === "myth" ? mythButton : factButton;
+
+  selectedButton.classList.add("selected");
+
+  mythButton.disabled = true;
+  factButton.disabled = true;
+
+  // Display feedback
+  const feedback = document.getElementById("gameFeedback");
+
+  feedback.hidden = false;
+  feedback.className = isCorrect
+    ? "game-feedback correct"
+    : "game-feedback incorrect";
+
+  document.getElementById("feedbackTitle").textContent =
+    isCorrect
+      ? "Correct! +10 Points"
+      : `Not quite! This statement is a ${question.answer.toUpperCase()}.`;
+
+  document.getElementById("feedbackExplanation").textContent =
+    question.explanation;
+
+  document.getElementById("gameScore").textContent =
+    `Score: ${challengeScore}`;
+
+  nextQuestionButton.hidden = false;
+}
+
+
+// 9. NEXT QUESTION
+function nextChallengeQuestion() {
+
+  if (!questionAnswered) return;
+
+  const total = challengeQuestions[challengeTopic].length;
+
+  if (questionIndex < total - 1) {
+    questionIndex++;
+    showChallengeQuestion();
+  } else {
+    showChallengeResults();
+  }
+}
+
+
+// 10. SHOW FINAL RESULTS
+function showChallengeResults() {
+
+  challengeGame.hidden = true;
+  challengeResults.hidden = false;
+
+  const total = challengeQuestions[challengeTopic].length;
+  const maximumScore = total * 10;
+
+  document.getElementById("finalScore").textContent =
+    `${challengeScore} / ${maximumScore}`;
+
+  const percentage = (challengeScore / maximumScore) * 100;
+
+  let message = "";
+
+  if (percentage === 100) {
+    message = "Excellent! You are a Health Fact Detective!";
+  } else if (percentage >= 60) {
+    message = "Great effort! Keep improving your health knowledge.";
+  } else {
+    message = "Keep learning! Review the lessons and try again.";
+  }
+
+  document.getElementById("resultMessage").textContent =
+    message;
+
+  challengeResults.scrollIntoView({
+    behavior: "smooth"
+  });
+}
+
+
+// 11. CONNECT THE GAME BUTTONS
+
+document.querySelectorAll(".challenge-topic-card")
+  .forEach(button => {
+
+    button.addEventListener("click", () => {
+      startChallenge(button.dataset.challenge);
+    });
+
+  });
+
+mythButton.addEventListener("click", () => {
+  submitChallengeAnswer("myth");
+});
+
+factButton.addEventListener("click", () => {
+  submitChallengeAnswer("fact");
+});
+
+nextQuestionButton.addEventListener("click", () => {
+  nextChallengeQuestion();
+});
+
+document.getElementById("playAgainButton")
+  .addEventListener("click", () => {
+    startChallenge(challengeTopic);
+  });
+
+document.getElementById("chooseAnotherButton")
+  .addEventListener("click", openChallengeHome);
+
+document.getElementById("backFromChallenge")
+  .addEventListener("click", restoreDashboard);

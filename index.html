@@ -229,7 +229,7 @@
       </section>
 
       
-    <!-- INTERACTIVE LEARNING MODULE -->
+      <!-- INTERACTIVE LEARNING MODULE -->
       <section id="lessonPanel" class="lesson-panel" hidden>
 
         <button id="backButton" class="back-button">
@@ -300,7 +300,165 @@
           </div>
         </div>
       </section>
+      
 
+      <!-- ===================================
+        PART 03 - MYTH VS FACT CHALLENGE
+      =================================== -->
+
+      <section id="mythFactSection" class="myth-fact-section" hidden>
+
+        <button id="backFromChallenge" class="back-button">
+          ← Back to Dashboard
+        </button>
+
+        <div class="challenge-heading">
+          <p class="eyebrow">MEDUCATE INTERACTIVE CHALLENGE</p>
+          <h2>Myth vs. Fact Challenge</h2>
+          <p>
+            Can you separate health myths from medical facts?
+            Test your knowledge and learn something new!
+          </p>
+        </div>
+
+        <!-- TOPIC SELECTION SCREEN -->
+        <div id="challengeHome">
+
+          <div class="challenge-intro">
+            <div>
+              <span class="challenge-label">READY TO PLAY?</span>
+              <h3>Become a Health Fact Detective!</h3>
+              <p>
+                Choose a health topic and answer five
+                Myth vs. Fact questions.
+              </p>
+            </div>
+
+            <div class="challenge-illustration" aria-hidden="true">
+              ?
+            </div>
+          </div>
+
+          <h3 class="choose-title">Choose Your Challenge</h3>
+
+          <div class="challenge-topic-grid">
+
+            <button class="challenge-topic-card"
+                    data-challenge="hypertension">
+              <span class="challenge-topic-icon">♥</span>
+              <strong>Hypertension</strong>
+              <small>5 Questions</small>
+              <span class="challenge-start">Start Challenge →</span>
+            </button>
+
+            <button class="challenge-topic-card"
+                    data-challenge="diabetes">
+              <span class="challenge-topic-icon">✚</span>
+              <strong>Diabetes Mellitus</strong>
+              <small>5 Questions</small>
+              <span class="challenge-start">Start Challenge →</span>
+            </button>
+
+            <button class="challenge-topic-card"
+                    data-challenge="medication">
+              <span class="challenge-topic-icon">✚</span>
+              <strong>Medication Safety</strong>
+              <small>5 Questions</small>
+              <span class="challenge-start">Start Challenge →</span>
+            </button>
+
+            <button class="challenge-topic-card"
+                    data-challenge="literacy">
+              <span class="challenge-topic-icon">◎</span>
+              <strong>Digital Health Literacy</strong>
+              <small>5 Questions</small>
+              <span class="challenge-start">Start Challenge →</span>
+            </button>
+
+          </div>
+        </div>
+
+        <!-- QUESTION SCREEN -->
+        <div id="challengeGame" hidden>
+
+          <div class="game-topbar">
+            <span id="gameTopicName">Health Topic</span>
+            <span id="gameScore">Score: 0</span>
+          </div>
+
+          <div class="game-progress-info">
+            <span id="gameQuestionCounter">Question 1 of 5</span>
+            <span id="gameProgressPercent">20%</span>
+          </div>
+
+          <div class="game-progress-track">
+            <div id="gameProgressFill"></div>
+          </div>
+
+          <div class="question-card">
+            <p class="question-label">MYTH OR FACT?</p>
+
+            <h3 id="gameStatement">
+              Your health statement will appear here.
+            </h3>
+
+            <div class="answer-grid">
+
+              <button id="mythButton" class="game-answer-button">
+                <span class="answer-symbol">✕</span>
+                <strong>MYTH</strong>
+                <small>This statement is false</small>
+              </button>
+
+              <button id="factButton" class="game-answer-button">
+                <span class="answer-symbol">✓</span>
+                <strong>FACT</strong>
+                <small>This statement is true</small>
+              </button>
+
+            </div>
+
+            <div id="gameFeedback" class="game-feedback"
+                aria-live="polite" hidden>
+              <h4 id="feedbackTitle"></h4>
+              <p id="feedbackExplanation"></p>
+            </div>
+
+            <button id="nextQuestionButton"
+                    class="game-next-button" hidden>
+              Next Question →
+            </button>
+
+          </div>
+        </div>
+
+        <!-- RESULTS SCREEN -->
+        <div id="challengeResults" class="results-card" hidden>
+
+          <div class="results-icon">★</div>
+
+          <h2>Challenge Completed!</h2>
+
+          <p>You have completed the Myth vs. Fact Challenge.</p>
+
+          <h3 id="finalScore">0 / 50</h3>
+
+          <p id="resultMessage"></p>
+
+          <div class="results-actions">
+            <button id="playAgainButton" class="game-next-button">
+              Play Again ↻
+            </button>
+
+            <button id="chooseAnotherButton"
+                    class="secondary-button">
+              Choose Another Topic
+            </button>
+          </div>
+
+        </div>
+
+      </section>
 
       <footer class="footer">
         Meducate | Nursing Informatics Educational Project
